@@ -12,6 +12,7 @@ class Week:
         nd = 6
         
     week = ['pn', 'wt', 'śr', 'cz', 'pt', 'sb', 'nd']
+    week_full = ['poniedziałek', 'wtorek', 'środa', 'czwartek', 'piątek', 'sobota', 'niedziela']
 
 def en_list(string: str) -> list[str]:
     return [i.strip() for i in string[1:-1].replace('"',"").split(',')]
@@ -27,7 +28,8 @@ def expand(fro: str, to: str) -> list[str]:
 
 
 def unpack(daytime: str):
-    # if daytime in week:
+    if daytime in Week.week:
+        return Week.week_full[Week.EnumWeek[daytime]]
         
     return 'wieczorem' if daytime == 'w' else 'rano'
 
@@ -73,7 +75,7 @@ def parse() -> tuple[dict, bool, bool, bool]:
             daytime = unpack(daytime_list[daytime_index]) if daytime_index < len(daytime_list) else 'rano'
             daytime_index += 1
 
-            times.append((day, daytime))
+            times.append((unpack(day), daytime))
 
         paths[month] = times  
 
