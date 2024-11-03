@@ -1,4 +1,6 @@
 import argparse
+import csv
+import random
 from enum import IntEnum
 
 class Week:
@@ -82,6 +84,30 @@ def parse() -> tuple[dict, bool, bool, bool]:
     return (paths, args.t, args.c, args.j)
 
 
+def read_csv(path):
+    with open(path, 'r') as plik:
+        dane = csv.DictReader(plik, delimiter=';')
+        for row in dane:
+            if row['Model'] == 'A':
+                print(row['Czas'])
+    return
+
+
+def write_csv(path):
+    model = ord('A') + random.randint(0, 2)
+    model = chr(model)
+    wynik = str(random.randint(0, 1000))
+    czas = str(random.randint(0, 1000)) + 's'
+
+    data = [
+        ['Model', 'Wynik', 'Czas'],
+        [model, wynik, czas]
+    ]
+
+    with open(path, 'w', newline='') as plik:
+        dane = csv.writer(plik, delimiter=';')
+        dane.writerows(data)
+    return
 
 
 def main() -> None:
