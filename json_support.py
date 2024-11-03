@@ -1,6 +1,5 @@
 import random
 import json
-import os
 
 def read_json(path):
     with open(path, 'r') as file:
@@ -22,14 +21,13 @@ def write_json(path):
 
     with open(path, 'w') as file:
         json.dump(data, file)
-        print(os.path.realpath(file.name))
 
     return
 
 if __name__ == "__main__":
     print('XD')
-    write_json("jomomma.json")
-    print(read_json("jomomma.json"))
+    write_json("testing.json")
+    print(read_json("testing.json"))
     print('XD')
 
 
