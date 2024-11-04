@@ -190,7 +190,8 @@ def main() -> None:
 
     paths, t_flag, csv_flag, json_flag = parse()
 
-    
+    create_files(paths, csv_flag, json_flag)
+    read_files(paths, csv_flag, json_flag)
 
 
 if __name__ == '__main__':
