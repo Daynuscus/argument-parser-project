@@ -1,5 +1,6 @@
 import argparse
 import csv
+import json
 import os
 import random
 from enum import IntEnum
@@ -141,6 +142,36 @@ def write_csv(path):
     with open(path, 'w', newline='') as plik:
         dane = csv.writer(plik, delimiter=';')
         dane.writerows(data)
+    return
+
+
+def read_json(path):
+    with open(path, 'r') as file:
+        data = json.load(file)
+    if(data["Model"] == 'A'):
+        wynik = data["Czas"]
+        wynik = wynik[0:-1]
+        wynik = int(wynik)
+        return wynik
+    else:
+        return 0
+
+
+def write_json(path):
+    model = ord('A') + random.randint(0, 2)
+    model = chr(model)
+    wynik = str(random.randint(0, 1000))
+    czas = str(random.randint(0, 1000)) + 's'
+
+    data = {
+        "Model": model,
+        "Wynik": wynik,
+        "Czas": czas
+    }
+
+    with open(path, 'w') as file:
+        json.dump(data, file)
+
     return
 
 
