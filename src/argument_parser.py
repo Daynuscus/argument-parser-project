@@ -1,5 +1,6 @@
 import argparse
 import csv
+import os
 import random
 from enum import IntEnum
 
@@ -34,6 +35,37 @@ def unpack(daytime: str):
         return Week.week_full[Week.EnumWeek[daytime]]
         
     return 'wieczorem' if daytime == 'w' else 'rano'
+
+
+def create_files(params: dict[str, list[tuple[str, str]]], csv: bool, json: bool) -> None:
+    for el in params.items():
+        month = el[0]
+        for day, daytime in el[1]:
+            path = os.path.join(os.getcwd(), month, day, daytime)
+
+            if csv:
+                write_csv(path)
+            if json:
+                write_json(path)
+
+
+
+def read_files(params: dict[str, list[tuple[str, str]]], csv: bool, json: bool) -> int:
+    result: int = 0
+
+    for el in params.items():
+        month = el[0]
+        for day, daytime in el[1]:
+            path = os.path.join(os.getcwd(), month, day, daytime)
+
+            if csv:
+                result = result + read_csv(path)
+            if json:
+                result = result + read_json(path)
+
+    return result
+
+
 
 def parse() -> tuple[dict, bool, bool, bool]:
     parser = argparse.ArgumentParser(description = "Project Management Tool")
