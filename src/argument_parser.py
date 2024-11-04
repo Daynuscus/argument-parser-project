@@ -37,20 +37,20 @@ def unpack(daytime: str):
     return 'wieczorem' if daytime == 'w' else 'rano'
 
 
-def create_files(params: dict[str, list[tuple[str, str]]], csv: bool, json: bool) -> None:
+def create_files(params: dict[str, list[tuple[str, str]]], csv_flag: bool, json_flag: bool) -> None:
     for el in params.items():
         month = el[0]
         for day, daytime in el[1]:
             path = os.path.join(os.getcwd(), month, day, daytime)
 
-            if csv:
+            if csv_flag:
                 write_csv(path)
-            if json:
+            if json_flag:
                 write_json(path)
 
 
 
-def read_files(params: dict[str, list[tuple[str, str]]], csv: bool, json: bool) -> int:
+def read_files(params: dict[str, list[tuple[str, str]]], csv_flag: bool, json_flag: bool) -> int:
     result: int = 0
 
     for el in params.items():
@@ -58,9 +58,9 @@ def read_files(params: dict[str, list[tuple[str, str]]], csv: bool, json: bool) 
         for day, daytime in el[1]:
             path = os.path.join(os.getcwd(), month, day, daytime)
 
-            if csv:
+            if csv_flag:
                 result = result + read_csv(path)
-            if json:
+            if json_flag:
                 result = result + read_json(path)
 
     return result
