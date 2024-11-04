@@ -129,9 +129,7 @@ def read_csv(path):
         for row in dane:
             if row['Model'] == 'A':
                 return int(row['Czas'][0:-1])
-            else:
-                return int(0)
-    return
+    return int(0)
 
 
 def write_csv(path):
