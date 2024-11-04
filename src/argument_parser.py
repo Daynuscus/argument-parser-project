@@ -130,7 +130,7 @@ def read_csv(path):
             if row['Model'] == 'A':
                 return int(row['Czas'][0:-1])
             else:
-                return 0
+                return int(0)
     return
 
 
