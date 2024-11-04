@@ -1,34 +1,31 @@
-# wszystko można poprawić w razie konieczności
-
 import os
 
+from src import csv_support, json_support
 
 def create_files(params: dict[str, list[tuple[str, str]]], csv: bool, json: bool) -> None:
     for el in params.items():
-        m = el[0]
-
-        for d,p in el[1]:
-            path = os.path.join(os.getcwd(), m, d, p)
+        month = el[0]
+        for day, daytime in el[1]:
+            path = os.path.join(os.getcwd(), month, day, daytime)
 
             if csv:
-                csv_worker.write(path)
+                csv_support.write_csv(path)
             if json:
-                json_worker.write(path)
+                json_support.write_json(path)
 
 
 
-def read_files(params: dict[str, list[tuple[str, str]]], csv: bool, json: bool) -> tuple[int, int]:
-    csv_result: int = 0
-    json_result: int = 0
+def read_files(params: dict[str, list[tuple[str, str]]], csv: bool, json: bool) -> int:
+    result: int = 0
 
     for el in params.items():
-        m = el[0]
-        for d,p in el[1]:
-            path = os.path.join(os.getcwd(), m, d, p)
+        month = el[0]
+        for day, daytime in el[1]:
+            path = os.path.join(os.getcwd(), month, day, daytime)
 
             if csv:
-                csv_result = csv_result + csv_worker.read(path)
+                result = result + csv_support.read_csv(path)
             if json:
-                json_result = json_result + json_worker.read(path)
+                result = result + json_support.read_json(path)
 
-    return csv_result, json_result
+    return result
