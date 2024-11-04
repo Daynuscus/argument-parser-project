@@ -89,7 +89,9 @@ def read_csv(path):
         dane = csv.DictReader(plik, delimiter=';')
         for row in dane:
             if row['Model'] == 'A':
-                print(row['Czas'])
+                return int(row['Czas'][0:-1])
+            else:
+                return 0
     return
 
 
@@ -118,8 +120,6 @@ def main() -> None:
 
 
     paths, t_flag, csv_flag, json_flag = parse()
-
-
 
     
 
