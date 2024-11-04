@@ -88,7 +88,7 @@ def parse() -> tuple[dict, bool, bool, bool]:
     parser.add_argument('-j', action = 'store_true')
 
     # For testing purposes
-    args = parser.parse_args(['[styczeń, luty]', '[pn-śr, pt-sb]', '[r, w, w]', '-t', '-c', '-j'])
+    args = parser.parse_args()
 
     month_list = en_list(args.month_list)
     week_list = en_list(args.week_list)
