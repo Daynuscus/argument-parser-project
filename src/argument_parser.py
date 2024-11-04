@@ -42,7 +42,10 @@ def create_files(params: dict[str, list[tuple[str, str]]], csv_flag: bool, json_
     for el in params.items():
         month = el[0]
         for day, daytime in el[1]:
-            path = os.path.join(os.getcwd(), month, day, daytime)
+            path = os.path.join(os.getcwd(), month, day)
+            if not os.path.exists(path):
+                os.makedirs(path)
+            path = os.path.join(path, daytime)
 
             if csv_flag:
                 write_csv(path)
@@ -57,7 +60,10 @@ def read_files(params: dict[str, list[tuple[str, str]]], csv_flag: bool, json_fl
     for el in params.items():
         month = el[0]
         for day, daytime in el[1]:
-            path = os.path.join(os.getcwd(), month, day, daytime)
+            path = os.path.join(os.getcwd(), month, day)
+            if not os.path.exists(path):
+                os.makedirs(path)
+            path = os.path.join(path, daytime)
 
             if csv_flag:
                 result = result + read_csv(path)
